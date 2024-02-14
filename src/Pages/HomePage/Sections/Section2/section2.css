@@ -1,0 +1,39 @@
+
+
+.sectiontwo {
+    margin-top: 35px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.sectiontwo-image-name{
+    position: relative;
+}
+
+
+.sectiontwo-name {
+    text-align: start;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.sectiontwo-image {
+    max-width: 100%;
+}
+
+
+@media screen and (max-width: 768px) {
+    .sectiontwo{
+        margin-top: 18px;
+        grid-template-columns: 1fr;
+        /* padding-left: 15px;
+        padding-right: 15px; */
+    }
+
+    .sectiontwo-name {
+      margin-top: 10px;
+        font-size: 18px;
+    }
+
+}

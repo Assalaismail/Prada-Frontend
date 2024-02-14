@@ -1,0 +1,47 @@
+
+.sectionone{
+    margin-top: 30px;
+}
+  .section1-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .carousel{
+    z-index: 1;
+  }
+
+.section1-image-name{
+    position: relative;
+}
+
+.section1-name{
+    position:absolute;
+    top: 0;
+    left:0;
+    padding-left:20px ;
+    padding-top: 10px;
+    z-index: 1;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+
+@media screen and (max-width: 768px) {
+    .sectionone{
+        margin-top: 10px;
+    }
+    .section1-name{
+        position:absolute;
+        top: 0;
+        left:0;
+        padding-left:5px ;
+        padding-top: 0px;
+        margin-top: 5px;
+        z-index: 1;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 600;
+    }
+}

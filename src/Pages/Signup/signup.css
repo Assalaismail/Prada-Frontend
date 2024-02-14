@@ -1,0 +1,166 @@
+.register-p{
+font-size: 12px;
+margin-top: 8px;
+}
+
+.mandatory-fields{
+font-size: 11px;
+}
+
+.register-first-div{
+
+}
+
+.register-div-fname-lname{
+display: flex;
+/* flex-wrap: wrap; */
+/* flex-direction: row; */
+gap: 15px;
+width: 100%;
+}
+
+.fname, .lname, .password, .dob{
+flex: 1;
+height: 55px;
+border: 1px solid black;
+}
+
+.fname:focus, .lname:focus, .password:focus, .dob:focus, .phone-input:focus{
+outline: none;
+}
+
+.register-country-phone{
+display: flex;
+width: 100%;
+border: 1px solid black;
+}
+
+.cross{
+font-size: 34px;
+font-weight: 100;
+
+}
+
+.phone-input{
+flex: 1;
+height: 55px;
+border: none;
+}
+
+.country-code{
+height: 55px;
+border-right: none;
+/* width: fit-content; */
+text-align: center;
+width: 200px;
+display: flex;
+justify-content: center;
+
+}
+.react-select__control {
+border: none !important;
+box-shadow: none !important;
+border-radius: 0;
+}
+
+.react-select__indicator-separator {
+display: none;
+}
+
+.react-select__dropdown-indicator {
+padding: 0;
+}
+
+.password-charac{
+display: flex;
+flex-direction: column;
+width: 100%;
+gap: 0px !important;
+position: relative;
+
+}
+
+.register-div-password{
+display: flex;
+width: 100%;
+}
+
+.pass-characters{
+font-size: 10px;
+color: grey;
+}
+
+
+.password {
+padding-right: 30px;
+}
+
+.toggle-password {
+position: absolute;
+top: 34%;
+right: 5px;
+transform: translateY(-50%);
+cursor: pointer;
+z-index: 1;
+}
+
+.toggle-password svg {
+font-size: 1.2rem;
+}
+
+.agreement {
+display: none;
+}
+
+.custom-checkbox {
+display: inline-block;
+width: 20px;
+height: 20px;
+border: 1px solid #333;
+margin-right: 10px;
+vertical-align: middle;
+cursor: pointer;
+}
+
+.label-agree{
+font-size: 14px;
+font-weight: 600;
+
+}
+.custom-checkbox::after {
+content: " ";
+display: block;
+width: 20px;
+height: 20px;
+background-color: transparent;
+}
+
+.agreement:checked + label .custom-checkbox::after {
+background-color: black;
+color: white;
+content: ' ✓';
+text-align: center;
+font-weight: 600;
+}
+
+.understood{
+font-size: 12px;
+font-weight: 600;
+}
+
+.register-btn{
+
+}
+
+.register-button{
+width: 100%;
+background-color: black;
+color: white;
+height: 55px;
+border: none;
+font-size: 16px;
+text-transform: uppercase;
+font-weight: 600;
+cursor: pointer;
+margin-bottom: 30px;
+}

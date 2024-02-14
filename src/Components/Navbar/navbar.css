@@ -1,0 +1,160 @@
+.nav{
+border-bottom: 1px solid grey;
+}
+
+
+.navbar {
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+position: relative;
+padding: 0px 20px;
+}
+
+
+.navbar-header {
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+position: relative;
+padding: 0px 20px;
+height: 60px;
+border-bottom: 1px solid lightgray;
+}
+
+.navbar-content{
+display: flex;
+padding-left: 40px;
+}
+
+.categories {
+list-style: none;
+display: flex;
+justify-content: center;
+cursor: pointer;
+}
+
+.category-subcategory {
+margin: 0 15px;
+color: black;
+}
+
+.logo {
+width: 127px;
+height: 20px;
+margin-left: 100px;
+}
+
+.subcategory-container {
+/* display: none; */
+position: absolute;
+top: 100%;
+left: 0;
+background-color: white;
+color: black;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+width: 100%;
+text-align: center;
+height: 150px;
+z-index: 2;
+}
+
+.subcategory-container {
+display: flex;
+justify-content: center;
+column-count: 5;
+}
+
+.subcategory-name {
+width: calc(100% - 150px);
+text-align: center;
+display: flex;
+align-items: flex-start;
+gap: 20px;
+padding-left: 20px;
+}
+
+.sub-name{
+margin-bottom: 5px;
+margin-top: 0;
+}
+
+.icons{
+display: flex;
+gap: 25px;
+color: black;
+cursor: pointer;
+justify-content: flex-end;
+align-items: center;
+margin-left: auto;
+margin-right: 100px;
+}
+
+.subcategory-container {
+display: block;
+}
+
+.menu-icon{
+display: none;
+}
+
+.subcategory-column {
+display: flex;
+justify-content: center;
+gap: 35px;
+padding: 10px;
+text-align: start;
+}
+
+
+@media (max-width: 768px) {
+.menu-icon {
+display: block;
+}
+
+.logo {
+width: 130px;
+height: 30px;
+margin-left: 10px;
+}
+
+.navbar{
+height: 40px;
+}
+
+
+.categories {
+display: none;
+flex-direction: column;
+position: absolute;
+top: 60px;
+left: 0;
+width: 100%;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.categories.mobile-menu-open{
+display: flex;
+width: auto;
+/* top: 54px; */
+right: 0;
+left: auto;
+gap: 10px;
+}
+
+.subcategory-container.mobile-menu-open{
+display: block;
+}
+
+.icons{
+gap: 10px;
+margin-right: 10px;
+
+}
+
+.user{
+display: none;
+}
+}
