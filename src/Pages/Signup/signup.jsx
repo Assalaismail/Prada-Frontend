@@ -7,24 +7,49 @@ import { countries } from 'countries-list';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-
 function Signup() {
 
-const [selectedCountry, setSelectedCountry] = useState(null);
-const [dateOfBirth, setDateOfBirth] = useState('');
 const [showPassword, setShowPassword] = useState(false);
 const [isChecked, setIsChecked] = useState(false);
+const [fullName, setFullName] = useState('');
+const [phone, setPhone] = useState("");
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [dob, setDateOfBirth] = useState('');
+
+const [selectedCountry, setSelectedCountry] = useState(null);
+const [phoneNumber, setPhoneNumber] = useState('');
 
 
+
+const handleNameChange = (e) => {
+const { id, value } = e.target;
+if (id === 'fname') {
+setFullName((prevName) => `${value} ${prevName.split(' ')[1] || ''}`);
+} else if (id === 'lname') {
+setFullName((prevName) => `${prevName.split(' ')[0] || ''} ${value}`);
+}
+};
+
+const handlePhoneChange = (e) => {
+setPhoneNumber(e.target.value);
+};
+
+const handleSubmit = () => {
+const combinedPhoneNumber = `${selectedCountry ? selectedCountry.phoneCode : ''}${phoneNumber}`;
+
+console.log('Combined Field:', combinedPhoneNumber);
+};
 
 const handleDateChange = (event) => {
 setDateOfBirth(event.target.value);
 };
 
-// Transform country data into options format for react-select
+
 const countryOptions = Object.keys(countries).map((countryCode) => ({
 value: countryCode,
 label: `${countries[countryCode].name} (+${countries[countryCode].phone})`,
+phoneCode: `+${countries[countryCode].phone}`,
 }));
 
 const togglePasswordVisibility = () => {
@@ -33,6 +58,41 @@ setShowPassword(!showPassword);
 
 const handleCheckboxChange = (e) => {
 setIsChecked(e.target.checked);
+};
+
+const handleEmailChange = (event) => {
+setEmail(event.target.value);
+};
+
+const handlePasswordChange = (event) => {
+setPassword(event.target.value);
+};
+
+const handleRegisterSubmit = async (event) => {
+event.preventDefault();
+
+try {
+const response = await axios.post("http://localhost:8000/api/register", {
+name: fullName,
+email,
+password,
+phone,
+dob,
+},
+{
+headers: {
+"Content-Type": "application/json",
+},
+});
+if (response.status === 200) {
+console.log("register ok")
+console.log(response)
+} else {
+//
+}
+} catch (error) {
+
+}
 };
 
 return (
@@ -49,36 +109,33 @@ return (
             <p className="mandatory-fields">Mandatory fields *</p>
 
             <div className="register-div-fname-lname">
-                <input type="text" id="fname" name= "fname" placeholder="Fisrt Name *" className="fname"
-                    required></input>
+                <input type="text" id="fname" name="fname" placeholder="First Name *" className="fname"
+                    onChange={handleNameChange} required />
+                <input type="text" id="lname" name="lname" placeholder="Last Name *" className="lname"
+                    onChange={handleNameChange} required />
 
-                <input type="text" id="lname" name= "lname" placeholder="Last Name *" className="lname"
-                    required></input>
             </div>
-
             <div className="register-country-phone">
                 <div className="country-select">
-                    <Select options={countryOptions} value={selectedCountry} onChange={(selectedOption)=>
-                        setSelectedCountry(selectedOption)}
-                        placeholder="Select country"
-                        classNamePrefix="react-select"
-                        className="country-code"
-                        />
+                    <Select options={countryOptions} id="countryCode" value={selectedCountry}
+                        onChange={setSelectedCountry} placeholder="Select country" classNamePrefix="react-select"
+                        className="country-code" />
                 </div>
-
                 <span className="cross">|</span>
-                <input type="text" placeholder="Phone number *" className="phone-input" />
+                <input type="number" id="phoneNumber" placeholder="Phone number *" className="phone-input"
+                    value={phoneNumber} onChange={handlePhoneChange} />
+                <button onClick={handleSubmit}>Submit</button>
             </div>
 
             <div className="register-div-fname-lname">
-                <input type="date" id="dateOfBirth" name="dateOfBirth" value={dateOfBirth}
-                    onChange={handleDateChange} className="dob" max={new Date().toISOString().split('T')[0]} required />
+                <input type="date" id="dateOfBirth" name="dateOfBirth" value={dob} onChange={handleDateChange}
+                    className="dob" max={new Date().toISOString().split('T')[0]} required />
             </div>
 
             <div className="password-charac">
                 <div className="register-div-password">
                     <input type={showPassword ? "text" : "password" } id="password" name="password"
-                        placeholder="Password *" className="password" required />
+                        placeholder="Password *" className="password" required onChange={handlePasswordChange} />
                     <span className="toggle-password" onClick={togglePasswordVisibility}>
                         <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
                     </span>
@@ -101,7 +158,8 @@ return (
 
             <div>
                 <p className="understood">By clicking on “Register”, you confirm that you have read and understood our
-                    Privacy Statement, you are over 16 years of age and that you want to register.</p>
+                    Privacy Statement, you are over 16 years of age and that you want to register.
+                </p>
             </div>
 
             <div className="register-div-fname-lname">

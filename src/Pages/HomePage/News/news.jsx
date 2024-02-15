@@ -12,7 +12,6 @@ useEffect(() => {
 const fetchNews = async () => {
 try {
 const response = await axios.get('https://app.kyveli.me/api/news');
-console.log('Newsssss:', response.data.data);
 setNews(response.data.data);
 }catch (error) {
 console.error('Error fetching data:', error);
@@ -29,22 +28,26 @@ slidesToShow: 1,
 slidesToScroll: 1,
 autoplay: true,
 autoplaySpeed: 2000,
+cssEase: "linear",
 };
 
 return (
 <div className="section-news">
+    {/* <p className='kyveli__news'>Kyveli__News</p> */}
     <Slider {...settings}>
-        {news.map((item, index) => (
+        {Array.isArray(news) &&
+        news.map((item, index) => (
         <div>
             <div key={index} className="news-item">
+
                 {item.image && (
                 <div className='news-image-name'>
                         <img src={item.image} alt="" className='news-image' />
                         <p className='news-name'>{item.name}</p>
                     <button className='discover'>Discover</button>
-
                 </div>
                 )}
+
                 {item.video && (
                 <div className='news-video-name'>
                     <video autoPlay muted className='news-video'>
@@ -52,16 +55,13 @@ return (
                     </video>
                     <p className='news-name'>{item.name}</p>
                     <button className='discover'>Discover</button>
-
                 </div>
                 )}
 
             </div>
-
         </div>
         ))}
     </Slider>
-
 </div>
 );
 }
