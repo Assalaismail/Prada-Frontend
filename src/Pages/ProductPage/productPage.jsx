@@ -14,67 +14,67 @@ const [sort, setSort] = useState('date-new-to-old');
 const [showFilter, setShowFilter] = useState(false);
 
 const handleFilterClick = () => {
-setShowFilter(true);
-document.body.classList.add('no-scroll');
+   setShowFilter(true);
+   document.body.classList.add('no-scroll');
 };
 
 const handleCloseFilter = () => {
-setShowFilter(false);
-document.body.classList.remove('no-scroll');
+   setShowFilter(false);
+   document.body.classList.remove('no-scroll');
 };
 
 useEffect(() => {
-fetchProducts();
-}, [categoryId, page, sort]);
+   fetchProducts();
+   }, [categoryId, page, sort]);
 
 const fetchProducts = async () => {
-if (fetching) return;
-setFetching(true);
-setLoading(true);
-try {
-const response = await axios.get(`https://app.kyveli.me/api/products/${categoryId}?page=${page}&sort=${sort}`);
-const newData = response.data.data;
-if (page === 1) {
-setProductsData({
-products: newData.products,
-product_count: newData.product_count,
-subcategory: newData.subcategory
-});
-} else {
-setProductsData(prevData => ({
-...prevData,
-products: [...prevData.products, ...newData.products],
-product_count: newData.product_count,
-subcategory: newData.subcategory
-}));
-}
-} catch (error) {
-console.error('Error fetching products:', error);
-} finally {
-setLoading(false);
-setFetching(false);
-}
+   if (fetching) return;
+   setFetching(true);
+   setLoading(true);
+    try {
+        const response = await axios.get(`https://app.kyveli.me/api/products/${categoryId}?page=${page}&sort=${sort}`);
+        const newData = response.data.data;
+        if (page === 1) {
+        setProductsData({
+                    products: newData.products,
+                    product_count: newData.product_count,
+                    subcategory: newData.subcategory
+                 });
+        } else {
+                setProductsData(prevData => ({
+                ...prevData,
+                products: [...prevData.products, ...newData.products],
+                product_count: newData.product_count,
+                subcategory: newData.subcategory
+            }));
+        }
+    } catch (error) {
+      console.error('Error fetching products: ', error);
+    } finally {
+        setLoading(false);
+        setFetching(false);
+    }
 };
 
 const handleScroll = () => {
-if (
-window.innerHeight + document.documentElement.scrollTop ===
-document.documentElement.offsetHeight
-) {
-setPage(prevPage => prevPage + 1);
-}
-};
+    if (
+        window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight
+    ) {
+   setPage(prevPage => prevPage + 1);
+    }
+ };
 
 useEffect(() => {
-window.addEventListener('scroll', handleScroll);
-return () => {
-window.removeEventListener('scroll', handleScroll);
-};
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+    window.removeEventListener('scroll', handleScroll);
+    };
 }, []);
 
 const handleSortChange = (event) => {
-setSort(event.target.value);
-setPage(1);
+    setSort(event.target.value);
+    setPage(1);
 };
 
 return (
@@ -82,7 +82,7 @@ return (
 
     <div className={`filter-overlay ${showFilter ? 'show' : '' }`}>
         <div className="filter-container">
-        <FilterPage onClose={handleCloseFilter} products={productsData.products} />
+            <FilterPage onClose={handleCloseFilter} products={productsData.products} />
         </div>
     </div>
 

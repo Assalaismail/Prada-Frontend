@@ -1,5 +1,20 @@
-.hii-assala{
-color: black;
-right: 0;
+.filter-page{
+    margin-left: 50px;
+}
+
+.color-swatch {
+    width: 15px;
+    height: 15px;
+    border: 1px solid black;
+    border-radius: 50px;
+    margin-right: 10px;
+}
+
+.products-color-name{
+   font-size: 14px;
 
 }
+
+.products-color-name:hover{
+   text-decoration: underline;
+ }
