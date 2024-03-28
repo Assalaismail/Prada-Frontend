@@ -13,12 +13,14 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 
+
 function Navbar() {
 const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 const [showSubcategory, setShowSubcategory] = useState(null);
 const isMouseOver = useRef(false);
 const subcategoryTimer = useRef(null);
 const [categories, setCategories] = useState([]);
+
 
 useEffect(() => {
 const fetchData = async () => {
@@ -51,11 +53,26 @@ setShowSubcategory(null);
 }, 200);
 };
 
+const handleSubcategoryClick = async (subcategory) => {
+try {
+const response = await axios.get(
+`http://localhost:8000/api/products/${subcategory.id}`
+);
+
+window.location.href = `/products/${subcategory.id}`;
+
+} catch (error) {
+console.error('Error fetching products:', error);
+}
+};
+
 return (
 <div className='nav'>
     <div className="navbar">
-        <img src={logo} alt="logo" className="logo"></img>
+        <a href="/">
 
+            <img src={logo} alt="logo" className="logo"></img>
+        </a>
         <div className="navbar-content">
             <ul className={`categories ${isMobileMenuOpen ? 'mobile-menu-open' : '' }`}>
                 {categories.map((category) => (
@@ -66,15 +83,14 @@ return (
                     <span>{category.name}</span>
 
                     {showSubcategory === category.name && category.subcategories && (
-                    <div className={`subcategory-container ${ isMobileMenuOpen ? 'mobile-menu-open' : '' }`}>
-                        {/* <div className="subcategory-column"> */}
-                            {category.subcategories.map((subcategory) => (
-                            <div key={subcategory.id} className='subcategory-name'>
-                                <p className='sub-name'>{subcategory.name}</p>
-                            </div>
-                            ))}
-                            {/*
-                        </div> */}
+                    <div className={`subcategory-container ${isMobileMenuOpen ? 'mobile-menu-open' : '' }`}>
+                        {category.subcategories.map((subcategory) => (
+                        <div key={subcategory.id} className='subcategory-name' onClick={()=>
+                            handleSubcategoryClick(subcategory)}
+                            >
+                            <p className='sub-name'>{subcategory.name}</p>
+                        </div>
+                        ))}
                     </div>
                     )}
                 </li>

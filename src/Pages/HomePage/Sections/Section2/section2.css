@@ -1,5 +1,7 @@
 
-
+.a-sections{
+    cursor: pointer;
+}
 .sectiontwo {
     margin-top: 35px;
     display: grid;

@@ -20,13 +20,19 @@ function SectionTwo() {
 
     console.log('SectionTwo state:', sectionTwo);
 
+    const handleItemClick = (id) => {
+        window.location.href = `/products/${id}`;
+    };
+
     return (
         <>
     <div className="sectiontwo">
         {Array.isArray(sectionTwo) && sectionTwo.map((item, index) => (
             <div className='sectiontwo-image-name' key={index}>
+                <a onClick={() => handleItemClick(item.id)} className='a-sections'>
                 <img src={item.image} alt={item.name} className='sectiontwo-image' />
                 <p className='sectiontwo-name'>{item.name}</p>
+                </a>
 
             </div>
         ))}

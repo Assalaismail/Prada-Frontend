@@ -18,7 +18,6 @@ const Header = () => {
         </div>
     </div>
     <Outlet/>
-
   </main>
 </section>
 

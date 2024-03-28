@@ -7,14 +7,14 @@ margin-top: 8px;
 font-size: 11px;
 }
 
-.register-first-div{
-
+.form-register{
+display: flex;
+flex-direction: column;
+gap: 15px;
 }
 
 .register-div-fname-lname{
 display: flex;
-/* flex-wrap: wrap; */
-/* flex-direction: row; */
 gap: 15px;
 width: 100%;
 }
@@ -49,13 +49,12 @@ border: none;
 .country-code{
 height: 55px;
 border-right: none;
-/* width: fit-content; */
 text-align: center;
 width: 200px;
 display: flex;
 justify-content: center;
-
 }
+
 .react-select__control {
 border: none !important;
 box-shadow: none !important;
@@ -87,7 +86,6 @@ width: 100%;
 font-size: 10px;
 color: grey;
 }
-
 
 .password {
 padding-right: 30px;
@@ -123,8 +121,8 @@ cursor: pointer;
 .label-agree{
 font-size: 14px;
 font-weight: 600;
-
 }
+
 .custom-checkbox::after {
 content: " ";
 display: block;
@@ -144,10 +142,6 @@ font-weight: 600;
 .understood{
 font-size: 12px;
 font-weight: 600;
-}
-
-.register-btn{
-
 }
 
 .register-button{

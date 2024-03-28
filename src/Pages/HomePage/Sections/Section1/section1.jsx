@@ -20,15 +20,20 @@ function SectionOne() {
 
     console.log('SectionOne state:', sectionOne);
 
+    const handleItemClick = (id) => {
+        window.location.href = `/products/${id}`;
+    };
+
     return (
         <>
             <div className="sectionone">
                 <div className="">
                     {sectionOne && (
                          <div className='section1-image-name'>
-                                    <p className='section1-name'>{sectionOne.name}</p>
+                             <a onClick={() => handleItemClick(sectionOne.id)} className='a-sections'>
+                            <p className='section1-name'>{sectionOne.name}</p>
                             <img src={sectionOne.image} alt={sectionOne.name} className='section1-image' />
-
+                            </a>
                         </div>
                     )}
                 </div>

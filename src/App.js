@@ -6,6 +6,7 @@ import Home from "./Pages/HomePage/home";
 import Login from './Pages/Login/login';
 import Signup from './Pages/Signup/signup';
 import Header from './Pages/header';
+import ProductPage from './Pages/ProductPage/productPage';
 function App() {
 return (
 <>
@@ -14,12 +15,15 @@ return (
 
             <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/products/:categoryId" element={<ProductPage />} />
+
             </Route>
 
 
         <Route path="/" element={<Header />}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
+
         </Route>
 
         </Routes>
