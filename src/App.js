@@ -16,7 +16,6 @@ return (
             <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/products/:categoryId" element={<ProductPage />} />
-
             </Route>
 
 

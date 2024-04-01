@@ -1,20 +1,104 @@
 .filter-page{
-    margin-left: 50px;
+margin-top: 50px;
+}
+
+.clear-apply-filters {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+margin-bottom: 75px;
+margin-left: 50px;
+margin-right: 50px;
+}
+
+.clear-filter, .apply-filter {
+background: none;
+border: none;
+cursor: pointer;
+font-size: 16px;
+font-weight: 700;
+text-transform: uppercase;
+}
+
+.clear-filter {
+text-decoration: underline;
+}
+
+.colors-div {
+cursor: pointer;
+height: 40vh;
+max-height: 40vh;
+margin-left: 50px;
+margin-right: 50px;
 }
 
 .color-swatch {
-    width: 15px;
-    height: 15px;
-    border: 1px solid black;
-    border-radius: 50px;
-    margin-right: 10px;
+width: 15px;
+height: 15px;
+border: 1px solid black;
+border-radius: 50px;
+margin-right: 10px;
 }
 
-.products-color-name{
-   font-size: 14px;
-
+.products-color-name {
+font-size: 14px;
 }
 
-.products-color-name:hover{
-   text-decoration: underline;
- }
+.products-color-name:hover {
+text-decoration: underline;
+text-underline-offset: 0.4em;
+}
+
+.sizes-div {
+height: 15vh;
+max-height: 15vh;
+margin-left: 50px;
+margin-right: 50px;
+}
+
+.sizes {
+cursor: pointer;
+display: flex;
+flex-direction: row;
+gap: 25px;
+}
+
+.products-size {
+width: 25px;
+font-size: 14px;
+text-align: center;
+padding: 5px;
+}
+
+.products-size:hover {
+text-decoration: underline;
+text-underline-offset: 0.4em;
+}
+
+.products-size.active {
+border: 1px solid black;
+}
+
+.products-size.active:hover {
+text-decoration: none;
+}
+
+.price-div{
+    margin-left: 50px;
+margin-right: 50px;
+}
+
+.price-slider {
+color: black;
+}
+
+.price-slider-div {
+display: flex;
+flex-direction: row;
+align-items: center;
+gap: 15px;
+}
+
+.css-188mx6n-MuiSlider-root {
+color: black !important;
+}

@@ -38,7 +38,9 @@ const fetchProducts = async () => {
         setProductsData({
                     products: newData.products,
                     product_count: newData.product_count,
-                    subcategory: newData.subcategory
+                    subcategory: newData.subcategory,
+                    minPrice: newData.minPrice,
+                    maxPrice: newData.maxPrice,
                  });
         } else {
                 setProductsData(prevData => ({
@@ -82,7 +84,7 @@ return (
 
     <div className={`filter-overlay ${showFilter ? 'show' : '' }`}>
         <div className="filter-container">
-            <FilterPage onClose={handleCloseFilter} products={productsData.products} />
+            <FilterPage onClose={handleCloseFilter} products={productsData.products}  minPrice={productsData.minPrice} maxPrice={productsData.maxPrice}/>
         </div>
     </div>
 
