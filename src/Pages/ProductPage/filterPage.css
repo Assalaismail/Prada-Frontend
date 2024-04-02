@@ -26,12 +26,15 @@ text-decoration: underline;
 
 .colors-div {
 cursor: pointer;
-height: 40vh;
-max-height: 40vh;
+height: 50vh;
+max-height: 50vh;
 margin-left: 50px;
 margin-right: 50px;
 }
 
+.colors-columns {
+    column-count: 2;
+}
 .color-swatch {
 width: 15px;
 height: 15px;
