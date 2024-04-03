@@ -6,6 +6,7 @@ import FilterPage from '../ProductPage/filterPage';
 
 function ProductPage() {
     const [productsData, setProductsData] = useState({});
+    const [productsDataa, setProductsDataa] = useState({});
     const { categoryId } = useParams();
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
@@ -44,12 +45,12 @@ function ProductPage() {
         setLoading(true);
         try {
             const apiUrl = `https://app.kyveli.me/api/products/${categoryId}?page=${page}&sort=${sort}`;
-            console.log("API URL:", apiUrl);
+            // console.log("API URL:", apiUrl);
 
             const response = await axios.get(apiUrl, {
                 params: filters
             });
-            console.log("API Response:", response.data);
+            // console.log("API Response:", response.data);
 
             const newData = response.data.data;
             if (page === 1) {
@@ -76,6 +77,24 @@ function ProductPage() {
         }
     };
 
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get(`https://app.kyveli.me/api/color/${categoryId}`);
+                setProductsDataa(response.data.data);
+
+                console.log("assala", productsDataa);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, [categoryId]);
+
+
     const handleScroll = () => {
         if (
             window.innerHeight + document.documentElement.scrollTop ===
@@ -101,11 +120,14 @@ function ProductPage() {
         <div className='productPage'>
             <div className={`filter-overlay ${showFilter ? 'show' : '' }`}>
                 <div className="filter-container">
-                    <FilterPage onClose={handleCloseFilter}
-                    products={productsData.products}
-                    minPrice={productsData.minPrice}
-                    maxPrice={productsData.maxPrice}
-                    applyFilters={applyFilters} />
+                    <FilterPage
+                        onClose={handleCloseFilter}
+                        colors={productsDataa.unique_colors}
+                        sizes={productsDataa.unique_sizes}
+                        minPrice={productsDataa.min_price}
+                        maxPrice={productsDataa.max_price}
+                        applyFilters={applyFilters}
+                    />
                 </div>
             </div>
             <div className='subcategory-count'>
@@ -113,8 +135,7 @@ function ProductPage() {
                     className='products-count'>{productsData.product_count} PRODUCTS</span></p>
                 <div>
                     <button className='products-filter-button' onClick={handleFilterClick}>
-                    FILTERS
-                    </button>
+                        FILTERS</button>
                     <span className='sort-label'>SORT BY:</span>
                     <select name="sort" id="sort" className='sort-select' onChange={handleSortChange} value={sort}>
                         <option value="date-new-to-old">New To Old</option>
