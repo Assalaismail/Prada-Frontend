@@ -105,3 +105,13 @@ gap: 15px;
 .css-188mx6n-MuiSlider-root {
 color: black !important;
 }
+
+
+.selected-count{
+    font-size: 12px;
+}
+
+.selected-symbol{
+    font-weight: 600;
+    margin-left: 10px;
+}

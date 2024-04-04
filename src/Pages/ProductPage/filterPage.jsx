@@ -6,31 +6,52 @@ function FilterPage({ onClose, colors, sizes, minPrice, maxPrice, applyFilters }
     const [activeIndices, setActiveIndices] = useState([]);
     const [range, setRange] = useState([minPrice, maxPrice]);
     const [selectedSizes, setSelectedSizes] = useState([]);
+    const [selectedCount, setSelectedCount] = useState(0);
+
+    const [activeColorIndices, setActiveColorIndices] = useState([]);
+    const [selectedColorCount, setSelectedColorCount] = useState(0);
 
 
-    console.log("colors:", colors);
+    const handleClickColors = (index) => {
+        const indexExists = activeColorIndices.includes(index);
+        if (indexExists) {
+            setActiveColorIndices(activeColorIndices.filter((i) => i !== index));
+            setSelectedColorCount(selectedColorCount - 1);
+        } else {
+            setActiveColorIndices([...activeColorIndices, index]);
+            setSelectedColorCount(selectedColorCount + 1);
+        }
+    };
+
     const handleClickSizes = (index) => {
         const indexExists = activeIndices.includes(index);
         if (indexExists) {
             setActiveIndices(activeIndices.filter((i) => i !== index));
+            setSelectedCount(selectedCount - 1);
         } else {
             setActiveIndices([...activeIndices, index]);
+            setSelectedCount(selectedCount + 1);
         }
     };
 
+
+
+
+
     const handleApplyFilters = () => {
-        // const filters = {
-        //     sizes: selectedSizes.map((sizeIndex) => sizes[sizeIndex - 1]),
-        //     min_price: range[0],
-        //     max_price: range[1],
-        // };
-        // applyFilters(filters);
+        const filters = {
+            sizes: sizes.map((sizeIndex) => sizes[sizeIndex - 1]),
+            min_price: range[0],
+            max_price: range[1],
+        };
+        applyFilters(filters);
         onClose();
     };
 
     useEffect(() => {
         setRange([minPrice, maxPrice]);
     }, [minPrice, maxPrice]);
+
 
     function handleChanges(event, newValue) {
         setRange(newValue);
@@ -44,21 +65,29 @@ function FilterPage({ onClose, colors, sizes, minPrice, maxPrice, applyFilters }
             </div>
 
             <div className='colors-div'>
-                <h4>Select Color</h4>
+                <h4>Select Color <span className='selected-count'>{selectedColorCount}</span></h4>
                 <div className='colors-columns'>
                     {colors?.map((color, index) => (
-                        <div key={index} style={{ display: 'flex', alignItems: 'center', breakInside: 'avoid-column' }}>
-                            <p className='color-swatch' style={{ backgroundColor: color.color_hex }}></p>
-                            <p className='products-color-name'>{color.color_title}</p>
-                        </div>
-                    ))}
+                    <div key={index} style={{ display: 'flex', alignItems: 'center', breakInside: 'avoid-column' }} >
+                        <p
+                            className={`color-swatch${activeColorIndices.includes(index) ? ' selected' : ''}`}
+                            style={{ backgroundColor: color.color_hex }}
+                            onClick={() => handleClickColors(index)}
+                        >
+                        </p>
+                        <p className='products-color-name' onClick={() => handleClickColors(index)}>{color.color_title} </p>
+
+                        {activeColorIndices.includes(index) && <span className="selected-symbol">&#10003;</span>}
+
+                    </div>
+                ))}
                 </div>
             </div>
 
             <hr></hr>
 
             <div className='sizes-div'>
-                <h4>Select Size</h4>
+                <h4>Select Size <span className='selected-count'>{selectedCount}</span></h4>
                 <div className='sizes'>
                     {sizes?.map((size, index) => (
                         <p

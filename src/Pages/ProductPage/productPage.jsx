@@ -34,7 +34,6 @@ function ProductPage() {
         setPage(1);
     };
 
-
     useEffect(() => {
         fetchProducts();
     }, [categoryId, page, sort, filters]);
@@ -45,12 +44,10 @@ function ProductPage() {
         setLoading(true);
         try {
             const apiUrl = `https://app.kyveli.me/api/products/${categoryId}?page=${page}&sort=${sort}`;
-            // console.log("API URL:", apiUrl);
 
             const response = await axios.get(apiUrl, {
                 params: filters
             });
-            // console.log("API Response:", response.data);
 
             const newData = response.data.data;
             if (page === 1) {
@@ -58,14 +55,11 @@ function ProductPage() {
                     products: newData.products,
                     product_count: newData.product_count,
                     subcategory: newData.subcategory,
-                    minPrice: newData.minPrice,
-                    maxPrice: newData.maxPrice,
                 });
             } else {
                 setProductsData(prevData => ({
                     ...prevData,
                     products: [...prevData.products, ...newData.products],
-                    product_count: newData.product_count,
                     subcategory: newData.subcategory
                 }));
             }
@@ -83,8 +77,6 @@ function ProductPage() {
             try {
                 const response = await axios.get(`https://app.kyveli.me/api/color/${categoryId}`);
                 setProductsDataa(response.data.data);
-
-                console.log("assala", productsDataa);
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {
@@ -118,6 +110,7 @@ function ProductPage() {
 
     return (
         <div className='productPage'>
+
             <div className={`filter-overlay ${showFilter ? 'show' : '' }`}>
                 <div className="filter-container">
                     <FilterPage
@@ -130,6 +123,7 @@ function ProductPage() {
                     />
                 </div>
             </div>
+
             <div className='subcategory-count'>
                 <p className='products-subcategory'>{productsData.subcategory} <span
                     className='products-count'>{productsData.product_count} PRODUCTS</span></p>
@@ -145,6 +139,7 @@ function ProductPage() {
                     </select>
                 </div>
             </div>
+
             <div className="product-container">
                 {Array.isArray(productsData.products) && productsData.products.map((product, index) => (
                     <div key={index}>
@@ -158,6 +153,7 @@ function ProductPage() {
                     </div>
                 ))}
             </div>
+
             {loading && <p>Loading...</p>}
         </div>
     );
