@@ -13,7 +13,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 
-
 function Navbar() {
 const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 const [showSubcategory, setShowSubcategory] = useState(null);
@@ -25,13 +24,12 @@ const [categories, setCategories] = useState([]);
 useEffect(() => {
 const fetchData = async () => {
 try {
-const response = await axios.get('http://localhost:8000/api/category');
+const response = await axios.get('https://app.kyveli.me/api/category');
 setCategories(response.data.data);
 } catch (error) {
 console.error('Error fetching data:', error);
 }
 };
-
 fetchData();
 }, []);
 
@@ -56,7 +54,7 @@ setShowSubcategory(null);
 const handleSubcategoryClick = async (subcategory) => {
 try {
 const response = await axios.get(
-`http://localhost:8000/api/products/${subcategory.id}`
+`https://app.kyveli.me/api/products/${subcategory.id}`
 );
 
 window.location.href = `/products/${subcategory.id}`;

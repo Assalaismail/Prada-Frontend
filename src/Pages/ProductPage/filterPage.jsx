@@ -5,12 +5,10 @@ import Slider from "@mui/material/Slider";
 function FilterPage({ onClose, colors, sizes, minPrice, maxPrice, applyFilters }) {
     const [activeIndices, setActiveIndices] = useState([]);
     const [range, setRange] = useState([minPrice, maxPrice]);
-    const [selectedSizes, setSelectedSizes] = useState([]);
-    const [selectedCount, setSelectedCount] = useState(0);
-
     const [activeColorIndices, setActiveColorIndices] = useState([]);
     const [selectedColorCount, setSelectedColorCount] = useState(0);
-
+    const [selectedSizes, setSelectedSizes] = useState([]);
+    const [selectedCount, setSelectedCount] = useState(0);
 
     const handleClickColors = (index) => {
         const indexExists = activeColorIndices.includes(index);
@@ -34,13 +32,10 @@ function FilterPage({ onClose, colors, sizes, minPrice, maxPrice, applyFilters }
         }
     };
 
-
-
-
+    console.log("assala",selectedSizes);
 
     const handleApplyFilters = () => {
         const filters = {
-            sizes: sizes.map((sizeIndex) => sizes[sizeIndex - 1]),
             min_price: range[0],
             max_price: range[1],
         };
@@ -55,12 +50,26 @@ function FilterPage({ onClose, colors, sizes, minPrice, maxPrice, applyFilters }
 
     function handleChanges(event, newValue) {
         setRange(newValue);
-    }
+    };
+
+
+    const handleClearFilters = () => {
+        setActiveIndices([]);
+        setRange([minPrice, maxPrice]);
+        setActiveColorIndices([]);
+        setSelectedColorCount(0);
+        setSelectedSizes([]);
+        setSelectedCount(0);
+        applyFilters({}); // Clear filters
+        onClose(); // Close the filter page
+    };
+
 
     return (
         <div className="filter-page">
+
             <div className='clear-apply-filters'>
-                <button className='clear-filter' onClick={onClose}> Clear Filters </button>
+                <button className='clear-filter' onClick={handleClearFilters}> Clear Filters </button>
                 <button className='apply-filter' onClick={handleApplyFilters}> Apply Filters</button>
             </div>
 
@@ -76,9 +85,7 @@ function FilterPage({ onClose, colors, sizes, minPrice, maxPrice, applyFilters }
                         >
                         </p>
                         <p className='products-color-name' onClick={() => handleClickColors(index)}>{color.color_title} </p>
-
                         {activeColorIndices.includes(index) && <span className="selected-symbol">&#10003;</span>}
-
                     </div>
                 ))}
                 </div>
@@ -116,7 +123,6 @@ function FilterPage({ onClose, colors, sizes, minPrice, maxPrice, applyFilters }
                     <h4>{maxPrice}</h4>
                 </div>
             </div>
-
         </div>
     );
 }
